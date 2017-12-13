@@ -20,39 +20,55 @@ router.post('/',function(req,res){
 	const body=req.body.events[0];
 	console.log(body.replyToken);
 
-	const options = {
-  		url: 'https://api.line.me/v2/bot/message/reply',
-  		headers: {
-			'Content-Type':'application/json',
-			'Authorization':'Bearer {CN0L/pbVjpdCK98GXNAv44bDywKbaM8LwyYKaAb+uc0ydiUQSn4b+Kgf30NZGQAqXgvaUlZDe83J5Y+PLwpmihSvJCyOGpDGWSJNtpSYbESDrXqtiIYMA2I0Lv8MCr8wJhpfrCGvJMwF9RbnX32BGwdB04t89/1O/w1cDnyilFU=}'
-			},
-  		json: true,
- 		body: {
-			replyToken:body.replyToken,
-			messages:[{
-				type:"text",
-				text:"テストでーす"
-			}]
-		}
-	};
-
-	console.log(options.body);
-
-	request.post(options, function(error, response, body){
-  		if (!error && response.statusCode == 200) {
-    			console.log('success!');
-  		} else {
-    			console.log(response.body);
+  if(body.beacon.type == 'enter'){
+    const options = {
+      url: 'https://api.line.me/v2/bot/message/reply',
+    	headers: {
+        'Content-Type':'application/json',
+  			'Authorization':'Bearer {CN0L/pbVjpdCK98GXNAv44bDywKbaM8LwyYKaAb+uc0ydiUQSn4b+Kgf30NZGQAqXgvaUlZDe83J5Y+PLwpmihSvJCyOGpDGWSJNtpSYbESDrXqtiIYMA2I0Lv8MCr8wJhpfrCGvJMwF9RbnX32BGwdB04t89/1O/w1cDnyilFU=}'},
+    	json: true,
+   		body: {
+  			replyToken:body.replyToken,
+  			messages:[{
+  				type:"text",
+  				text:"LineBeaconの領域に入りました！"
+  			}]
   		}
-	});	
+  	};
 
-	const response = {
-        	header:{
-          		status:"appVersion old",		
-			responseCode:2
-        },
-        	response:null
-	};
+  	request.post(options, function(error, response, body){
+    		if (!error && response.statusCode == 200) {
+      			console.log('success!');
+    		} else {
+      			console.log(response.body);
+    		}
+  	});
+  }else if(body.beacon.type == 'leave'){
+    const options = {
+      url: 'https://api.line.me/v2/bot/message/reply',
+    	headers: {
+        'Content-Type':'application/json',
+  			'Authorization':'Bearer {CN0L/pbVjpdCK98GXNAv44bDywKbaM8LwyYKaAb+uc0ydiUQSn4b+Kgf30NZGQAqXgvaUlZDe83J5Y+PLwpmihSvJCyOGpDGWSJNtpSYbESDrXqtiIYMA2I0Lv8MCr8wJhpfrCGvJMwF9RbnX32BGwdB04t89/1O/w1cDnyilFU=}'},
+    	json: true,
+   		body: {
+  			replyToken:body.replyToken,
+  			messages:[{
+  				type:"text",
+  				text:"LineBeaconの領域から出ました！"
+  			}]
+  		}
+  	};
+
+  	request.post(options, function(error, response, body){
+    		if (!error && response.statusCode == 200) {
+      			console.log('success!');
+    		} else {
+      			console.log(response.body);
+    		}
+  	});
+  }
+
+	const response = {};
 	res.send(JSON.stringify(response));
 });
 
