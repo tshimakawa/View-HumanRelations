@@ -4,8 +4,6 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const mongo = require('mongoose');
-const mongoose = require('mongoose');
 const https = require('https');
 const fs = require('fs');
 
@@ -35,16 +33,6 @@ requestCert: true,
 rejectUnauthorized: false
 };
 
-mongoose.Promise = global.Promise;
-const mongodbUri = 'mongodb://localhost/household_account';
-const mongOptions = {
-    useMongoClient: true,
-    socketTimeoutMS: 0,
-    keepAlive: true,
-    reconnectTries: 30
-};
-
-//ルーティングの設定 各エンドポイントに対応したルーティング先に誘導
 app.use('/', index);
 app.use('/users', users);
 //app.login('/login',login);
@@ -73,7 +61,6 @@ app.set('httpsport', process.env.PORT || 44502);
 // サーバ立ち上げ
 var server = https.createServer(ssloptions,app).listen(app.get('httpsport'), function(){
     console.log('Express HTTPS server listening on port ' + app.get('httpsport'));
-    mongoose.connect(mongodbUri, mongOptions);
 });
 
 module.exports = app;
