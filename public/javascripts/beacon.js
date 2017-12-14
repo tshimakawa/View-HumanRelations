@@ -25,8 +25,6 @@ exports.beaconEvents = function(eventInfo){
         }else{
           const room = result_room[0].room;
 
-          console.log(room);
-
           if(eventInfo.beacon.type == 'enter'){
             options = {
               url: 'https://api.line.me/v2/bot/message/reply',
@@ -38,7 +36,7 @@ exports.beaconEvents = function(eventInfo){
                 replyToken:eventInfo.replyToken,
                 messages:[{
                   type:"text",
-                  text:`"${userName}が"${room}"に入室しました`
+                  text:`${userName}が${room}に入室しました`
                 }]
               }
             };
@@ -53,7 +51,7 @@ exports.beaconEvents = function(eventInfo){
                 replyToken:eventInfo.replyToken,
                 messages:[{
                   type:"text",
-                  text:`"${userName}が"${room}"から退室しました`
+                  text:`${userName}が${room}から退室しました`
                 }]
               }
             };
