@@ -21,11 +21,11 @@ router.post('/',function(req,res){
 
   switch (body.type){
     case 'beacon':
-      modual.beacon.beaconEvents();
+      modual.beacon.beaconEvents(body);
       break;
 
     case 'follow':
-      modual.follow.followEvents();
+      modual.follow.followEvents(body);
       break;
 
     default:
