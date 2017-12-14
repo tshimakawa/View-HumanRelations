@@ -53,7 +53,7 @@ exports.beaconEvents = function(eventInfo){
               }
             });
           }else if(eventInfo.beacon.type == 'leave'){
-            connection.query(`INSERT INTO userLocation(userID,romm) VALUES("${userID}","外出")`,function(error,result,fields){
+            connection.query(`INSERT INTO userLocation(userID,room) VALUES("${userID}","外出")`,function(error,result,fields){
               if(error){
                 throw error;
               }else{
