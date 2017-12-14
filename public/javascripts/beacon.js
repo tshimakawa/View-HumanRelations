@@ -45,6 +45,13 @@ exports.beaconEvents = function(eventInfo){
                     }]
                   }
                 };
+                request.post(options, function(error, response, body){
+                    if (!error && response.statusCode == 200) {
+                        console.log('success!');
+                    } else {
+                        console.log(response.body);
+                    }
+                });
               }
             });
           }else if(eventInfo.beacon.type == 'leave'){
@@ -66,16 +73,16 @@ exports.beaconEvents = function(eventInfo){
                     }]
                   }
                 };
+                request.post(options, function(error, response, body){
+                    if (!error && response.statusCode == 200) {
+                        console.log('success!');
+                    } else {
+                        console.log(response.body);
+                    }
+                });
               }
             });
           }
-          request.post(options, function(error, response, body){
-              if (!error && response.statusCode == 200) {
-                  console.log('success!');
-              } else {
-                  console.log(response.body);
-              }
-          });
         }
       });
     }
