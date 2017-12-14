@@ -24,10 +24,8 @@ exports.beaconEvents = function(eventInfo){
           throw error;
         }else{
           const room = result_room[0].room;
-          console.log(userID);
-          console.log(room);
           if(eventInfo.beacon.type == 'enter'){
-            connection.query(`INSERT INTO userLocation(userID,romm) VALUES("${userID}","${room}")`,function(error,result,fields){
+            connection.query(`INSERT INTO userLocation(userID,room) VALUES("${userID}","${room}")`,function(error,result,fields){
               if(error){
                 throw error;
               }else{
