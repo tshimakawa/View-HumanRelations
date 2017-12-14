@@ -24,39 +24,49 @@ exports.beaconEvents = function(eventInfo){
           throw error;
         }else{
           const room = result_room[0].room;
-
           if(eventInfo.beacon.type == 'enter'){
-            options = {
-              url: 'https://api.line.me/v2/bot/message/reply',
-              headers: {
-                'Content-Type':'application/json',
-                'Authorization':'Bearer {0TFlC+RkUreO3Vo2NnuIpRZMHUQ+5FgGEmlWhSbU6QjjAZcBT5in0wcBDdZP7AQne1nSJ5pesVigCvVE2hZSGlieFoZL4YpUnfImwzrXrKjlqjogGqEQw62+/fCKDJgyeIFL86s6ewFpDjmzrMfGGgdB04t89/1O/w1cDnyilFU=}'},
-              json: true,
-              body: {
-                replyToken:eventInfo.replyToken,
-                messages:[{
-                  type:"text",
-                  text:`${userName}が${room}に入室しました`
-                }]
+            connection.query(`INSERT INTO userLocation(userID,romm) VALUES("${userID}","${room}")`,function(error,result,fields){
+              if(error){
+                throw error;
+              }else{
+                options = {
+                  url: 'https://api.line.me/v2/bot/message/reply',
+                  headers: {
+                    'Content-Type':'application/json',
+                    'Authorization':'Bearer {0TFlC+RkUreO3Vo2NnuIpRZMHUQ+5FgGEmlWhSbU6QjjAZcBT5in0wcBDdZP7AQne1nSJ5pesVigCvVE2hZSGlieFoZL4YpUnfImwzrXrKjlqjogGqEQw62+/fCKDJgyeIFL86s6ewFpDjmzrMfGGgdB04t89/1O/w1cDnyilFU=}'},
+                  json: true,
+                  body: {
+                    replyToken:eventInfo.replyToken,
+                    messages:[{
+                      type:"text",
+                      text:`${userName}が${room}に入室しました`
+                    }]
+                  }
+                };
               }
-            };
+            });
           }else if(eventInfo.beacon.type == 'leave'){
-            options = {
-              url: 'https://api.line.me/v2/bot/message/reply',
-              headers: {
-                'Content-Type':'application/json',
-                'Authorization':'Bearer {0TFlC+RkUreO3Vo2NnuIpRZMHUQ+5FgGEmlWhSbU6QjjAZcBT5in0wcBDdZP7AQne1nSJ5pesVigCvVE2hZSGlieFoZL4YpUnfImwzrXrKjlqjogGqEQw62+/fCKDJgyeIFL86s6ewFpDjmzrMfGGgdB04t89/1O/w1cDnyilFU=}'},
-              json: true,
-              body: {
-                replyToken:eventInfo.replyToken,
-                messages:[{
-                  type:"text",
-                  text:`${userName}が${room}から退室しました`
-                }]
+            connection.query(`INSERT INTO userLocation(userID,romm) VALUES("${userID}","外出")`,function(error,result,fields){
+              if(error){
+                throw error;
+              }else{
+                options = {
+                  url: 'https://api.line.me/v2/bot/message/reply',
+                  headers: {
+                    'Content-Type':'application/json',
+                    'Authorization':'Bearer {0TFlC+RkUreO3Vo2NnuIpRZMHUQ+5FgGEmlWhSbU6QjjAZcBT5in0wcBDdZP7AQne1nSJ5pesVigCvVE2hZSGlieFoZL4YpUnfImwzrXrKjlqjogGqEQw62+/fCKDJgyeIFL86s6ewFpDjmzrMfGGgdB04t89/1O/w1cDnyilFU=}'},
+                  json: true,
+                  body: {
+                    replyToken:eventInfo.replyToken,
+                    messages:[{
+                      type:"text",
+                      text:`${userName}が${room}から退室しました`
+                    }]
+                  }
+                };
               }
-            };
+            });
           }
-
           request.post(options, function(error, response, body){
               if (!error && response.statusCode == 200) {
                   console.log('success!');
@@ -64,7 +74,6 @@ exports.beaconEvents = function(eventInfo){
                   console.log(response.body);
               }
           });
-
         }
       });
     }
