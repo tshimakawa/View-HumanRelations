@@ -23,6 +23,9 @@ exports.beaconEvents = function(eventInfo){
           throw error;
         }else{
           const room = result_room[0].room;
+
+          console.log(room);
+
           if(eventInfo.beacon.type == 'enter'){
             options = {
               url: 'https://api.line.me/v2/bot/message/reply',
