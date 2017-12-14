@@ -8,7 +8,7 @@ const connection = mysql.createConnection({
   database : 'LineBeaconSystem'
 });
 
-const options = {};
+let options = {};
 
 exports.beaconEvents = function(eventInfo){
   console.log("Entered beacons.js");
