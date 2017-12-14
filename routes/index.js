@@ -28,8 +28,13 @@ router.post('/',function(req,res){
       modual.follow.followEvents(body);
       break;
 
+    case 'message':
+      modual.message.messageEvents(body);
+      break;
+
     default:
       console.log("新しいtypeです");
+      break;
   }
 
 	const response = {};
