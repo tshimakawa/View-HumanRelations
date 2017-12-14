@@ -11,6 +11,7 @@ const connection = mysql.createConnection({
 const options = {};
 
 exports.beaconEvents = function(eventInfo){
+  console.log("Entered beacons.js");
   const beaconID = eventInfo.beacon.hwid;
   const userID = eventInfo.source.userId;
   connection(`SELECT name FROM user WHERE userID="${userID}"`,function(error,result_name,fields){
