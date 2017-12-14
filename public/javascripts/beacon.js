@@ -14,12 +14,12 @@ exports.beaconEvents = function(eventInfo){
   console.log("Entered beacons.js");
   const beaconID = eventInfo.beacon.hwid;
   const userID = eventInfo.source.userId;
-  connection(`SELECT name FROM user WHERE userID="${userID}"`,function(error,result_name,fields){
+  connection.query(`SELECT name FROM user WHERE userID="${userID}"`,function(error,result_name,fields){
     if(error){
       throw error;
     }else{
       const userName = result_name[0].name;
-      connection(`SELECT room FROM room_beacon WHERE beaconID="${beaconID}"`,function(error,result_room,fields){
+      connection.query(`SELECT room FROM room_beacon WHERE beaconID="${beaconID}"`,function(error,result_room,fields){
         if(error){
           throw error;
         }else{
