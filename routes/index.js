@@ -48,7 +48,7 @@ router.post('/',function(req,res){
       url: 'https://api.line.me/v2/bot/message/reply',
     	headers: {
         'Content-Type':'application/json',
-  			'Authorization':'Bearer {CN0L/pbVjpdCK98GXNAv44bDywKbaM8LwyYKaAb+uc0ydiUQSn4b+Kgf30NZGQAqXgvaUlZDe83J5Y+PLwpmihSvJCyOGpDGWSJNtpSYbESDrXqtiIYMA2I0Lv8MCr8wJhpfrCGvJMwF9RbnX32BGwdB04t89/1O/w1cDnyilFU=}'},
+  			'Authorization':'Bearer {4dqCT0a2XL98sVOpB6IecU5MUPYMOhM6ooKPyu8XSEiY3jzJGbvkI30le6wtcH2JXgvaUlZDe83J5Y+PLwpmihSvJCyOGpDGWSJNtpSYbEQUgzgy9tul27dfTCm5viRWMymVGYwJCzVA9NW7NChLggdB04t89/1O/w1cDnyilFU=}'},
     	json: true,
    		body: {
   			replyToken:body.replyToken,
