@@ -14,6 +14,7 @@ exports.beaconEvents = function(eventInfo){
   console.log("Entered beacons.js");
   const beaconID = eventInfo.beacon.hwid;
   const userID = eventInfo.source.userId;
+  const replyToken = eventInfo.replyToken;
   connection.query(`SELECT name FROM user WHERE userID="${userID}"`,function(error,result_name,fields){
     if(error){
       throw error;
@@ -36,7 +37,7 @@ exports.beaconEvents = function(eventInfo){
                     'Authorization':'Bearer {0TFlC+RkUreO3Vo2NnuIpRZMHUQ+5FgGEmlWhSbU6QjjAZcBT5in0wcBDdZP7AQne1nSJ5pesVigCvVE2hZSGlieFoZL4YpUnfImwzrXrKjlqjogGqEQw62+/fCKDJgyeIFL86s6ewFpDjmzrMfGGgdB04t89/1O/w1cDnyilFU=}'},
                   json: true,
                   body: {
-                    replyToken:eventInfo.replyToken,
+                    replyToken:replyToken,
                     messages:[{
                       type:"text",
                       text:`${userName}が${room}に入室しました`
@@ -64,7 +65,7 @@ exports.beaconEvents = function(eventInfo){
                     'Authorization':'Bearer {0TFlC+RkUreO3Vo2NnuIpRZMHUQ+5FgGEmlWhSbU6QjjAZcBT5in0wcBDdZP7AQne1nSJ5pesVigCvVE2hZSGlieFoZL4YpUnfImwzrXrKjlqjogGqEQw62+/fCKDJgyeIFL86s6ewFpDjmzrMfGGgdB04t89/1O/w1cDnyilFU=}'},
                   json: true,
                   body: {
-                    replyToken:eventInfo.replyToken,
+                    replyToken:replyToken,
                     messages:[{
                       type:"text",
                       text:`${userName}が${room}から退室しました`
