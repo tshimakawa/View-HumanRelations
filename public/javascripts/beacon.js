@@ -26,7 +26,15 @@ exports.beaconEvents = function(eventInfo){
         }else{
           const room = result_room[0].room;
           if(eventInfo.beacon.type == 'enter'){
-            connection.query(`INSERT INTO userLocation(userID,room) VALUES("${userID}","${room}")`,function(error,result,fields){
+            const date = new Date();
+            const year = date.getFullYear();
+            const month = date.getMonth()+1;
+            const day = date.getDate();
+            const hour = date.getHours();
+            const minute = date.getMinutes();
+            const second = date.getSeconds();
+
+            connection.query(`INSERT INTO userLocation(userID,room,date,time) VALUES("${userID}","${room}","${year}-${month}-${day}","${hour}:${minute}:${second}")`,function(error,result,fields){
               if(error){
                 throw error;
               }else{
@@ -54,7 +62,7 @@ exports.beaconEvents = function(eventInfo){
               }
             });
           }else if(eventInfo.beacon.type == 'leave'){
-            connection.query(`INSERT INTO userLocation(userID,room) VALUES("${userID}","外出")`,function(error,result,fields){
+            connection.query(`INSERT INTO userLocation(userID,room,date,time) VALUES("${userID}","外出","${year}-${month}-${day}","${hour}:${minute}:${second}")`,function(error,result,fields){
               if(error){
                 throw error;
               }else{
