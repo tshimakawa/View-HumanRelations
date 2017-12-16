@@ -30,27 +30,27 @@ exports.beaconEvents = function(eventInfo){
               if(error){
                 throw error;
               }else{
-                options = {
-                  url: 'https://api.line.me/v2/bot/message/reply',
-                  headers: {
-                    'Content-Type':'application/json',
-                    'Authorization':'Bearer {0TFlC+RkUreO3Vo2NnuIpRZMHUQ+5FgGEmlWhSbU6QjjAZcBT5in0wcBDdZP7AQne1nSJ5pesVigCvVE2hZSGlieFoZL4YpUnfImwzrXrKjlqjogGqEQw62+/fCKDJgyeIFL86s6ewFpDjmzrMfGGgdB04t89/1O/w1cDnyilFU=}'},
-                  json: true,
-                  body: {
-                    replyToken:replyToken,
-                    messages:[{
-                      type:"text",
-                      text:`${userName}が${room}に入室しました`
-                    }]
-                  }
-                };
-                request.post(options, function(error, response, body){
-                    if (!error && response.statusCode == 200) {
-                        console.log('success!');
-                    } else {
-                        console.log(response.body);
-                    }
-                });
+                // options = {
+                //   url: 'https://api.line.me/v2/bot/message/reply',
+                //   headers: {
+                //     'Content-Type':'application/json',
+                //     'Authorization':'Bearer {0TFlC+RkUreO3Vo2NnuIpRZMHUQ+5FgGEmlWhSbU6QjjAZcBT5in0wcBDdZP7AQne1nSJ5pesVigCvVE2hZSGlieFoZL4YpUnfImwzrXrKjlqjogGqEQw62+/fCKDJgyeIFL86s6ewFpDjmzrMfGGgdB04t89/1O/w1cDnyilFU=}'},
+                //   json: true,
+                //   body: {
+                //     replyToken:replyToken,
+                //     messages:[{
+                //       type:"text",
+                //       text:`${userName}が${room}に入室しました`
+                //     }]
+                //   }
+                // };
+                // request.post(options, function(error, response, body){
+                //     if (!error && response.statusCode == 200) {
+                //         console.log('success!');
+                //     } else {
+                //         console.log(response.body);
+                //     }
+                // });
               }
             });
           }else if(eventInfo.beacon.type == 'leave'){
@@ -58,27 +58,27 @@ exports.beaconEvents = function(eventInfo){
               if(error){
                 throw error;
               }else{
-                options = {
-                  url: 'https://api.line.me/v2/bot/message/reply',
-                  headers: {
-                    'Content-Type':'application/json',
-                    'Authorization':'Bearer {0TFlC+RkUreO3Vo2NnuIpRZMHUQ+5FgGEmlWhSbU6QjjAZcBT5in0wcBDdZP7AQne1nSJ5pesVigCvVE2hZSGlieFoZL4YpUnfImwzrXrKjlqjogGqEQw62+/fCKDJgyeIFL86s6ewFpDjmzrMfGGgdB04t89/1O/w1cDnyilFU=}'},
-                  json: true,
-                  body: {
-                    replyToken:replyToken,
-                    messages:[{
-                      type:"text",
-                      text:`${userName}が${room}から退室しました`
-                    }]
-                  }
-                };
-                request.post(options, function(error, response, body){
-                    if (!error && response.statusCode == 200) {
-                        console.log('success!');
-                    } else {
-                        console.log(response.body);
-                    }
-                });
+                // options = {
+                //   url: 'https://api.line.me/v2/bot/message/reply',
+                //   headers: {
+                //     'Content-Type':'application/json',
+                //     'Authorization':'Bearer {0TFlC+RkUreO3Vo2NnuIpRZMHUQ+5FgGEmlWhSbU6QjjAZcBT5in0wcBDdZP7AQne1nSJ5pesVigCvVE2hZSGlieFoZL4YpUnfImwzrXrKjlqjogGqEQw62+/fCKDJgyeIFL86s6ewFpDjmzrMfGGgdB04t89/1O/w1cDnyilFU=}'},
+                //   json: true,
+                //   body: {
+                //     replyToken:replyToken,
+                //     messages:[{
+                //       type:"text",
+                //       text:`${userName}が${room}から退室しました`
+                //     }]
+                //   }
+                // };
+                // request.post(options, function(error, response, body){
+                //     if (!error && response.statusCode == 200) {
+                //         console.log('success!');
+                //     } else {
+                //         console.log(response.body);
+                //     }
+                // });
               }
             });
           }

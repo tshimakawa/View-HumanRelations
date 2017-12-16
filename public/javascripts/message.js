@@ -47,7 +47,28 @@ exports.messageEvents = function(eventInfo){
         if(error){
           throw error;
         }else if(result_location.length == 0){
-
+          const replyMessage = `${messageText}さんはまだ現在地が登録されていません`;
+          const options = {
+            url: 'https://api.line.me/v2/bot/message/reply',
+            headers: {
+              'Content-Type':'application/json',
+              'Authorization':'Bearer {0TFlC+RkUreO3Vo2NnuIpRZMHUQ+5FgGEmlWhSbU6QjjAZcBT5in0wcBDdZP7AQne1nSJ5pesVigCvVE2hZSGlieFoZL4YpUnfImwzrXrKjlqjogGqEQw62+/fCKDJgyeIFL86s6ewFpDjmzrMfGGgdB04t89/1O/w1cDnyilFU=}'},
+            json: true,
+            body: {
+              replyToken:replyToken,
+              messages:[{
+                type:"text",
+                text:replyMessage
+              }]
+            }
+          };
+          request.post(options, function(error, response, body){
+              if (!error && response.statusCode == 200) {
+                  console.log('success!');
+              } else {
+                  console.log(response.body);
+              }
+          });
         }else{
           const location = result_location[result_location.length-1].room;
           const replyMessage = `${messageText}さんは${location}にいます`;
@@ -75,7 +96,28 @@ exports.messageEvents = function(eventInfo){
         }
       });
     }else{
-
+      const replyMessage = "エラーが発生しています\n管理者に報告してください";
+      const options = {
+        url: 'https://api.line.me/v2/bot/message/reply',
+        headers: {
+          'Content-Type':'application/json',
+          'Authorization':'Bearer {0TFlC+RkUreO3Vo2NnuIpRZMHUQ+5FgGEmlWhSbU6QjjAZcBT5in0wcBDdZP7AQne1nSJ5pesVigCvVE2hZSGlieFoZL4YpUnfImwzrXrKjlqjogGqEQw62+/fCKDJgyeIFL86s6ewFpDjmzrMfGGgdB04t89/1O/w1cDnyilFU=}'},
+        json: true,
+        body: {
+          replyToken:replyToken,
+          messages:[{
+            type:"text",
+            text:replyMessage
+          }]
+        }
+      };
+      request.post(options, function(error, response, body){
+          if (!error && response.statusCode == 200) {
+              console.log('success!');
+          } else {
+              console.log(response.body);
+          }
+      });
     }
   });
 }
