@@ -7,14 +7,6 @@ const connection = mysql.createConnection({
   password : 'light12345',
   database : 'LineBeaconSystem'
 });
-const date = new Date();
-const year = date.getFullYear();
-const month = date.getMonth()+1;
-const day = date.getDate();
-const hour = date.getHours();
-const minute = date.getMinutes();
-const second = date.getSeconds();
-
 
 let options = {};
 
@@ -23,6 +15,15 @@ exports.beaconEvents = function(eventInfo){
   const beaconID = eventInfo.beacon.hwid;
   const userID = eventInfo.source.userId;
   const replyToken = eventInfo.replyToken;
+
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = date.getMonth()+1;
+  const day = date.getDate();
+  const hour = date.getHours();
+  const minute = date.getMinutes();
+  const second = date.getSeconds();
+
   connection.query(`SELECT name FROM user WHERE userID="${userID}"`,function(error,result_name,fields){
     if(error){
       throw error;
