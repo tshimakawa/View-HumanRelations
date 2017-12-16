@@ -7,6 +7,14 @@ const connection = mysql.createConnection({
   password : 'light12345',
   database : 'LineBeaconSystem'
 });
+const date = new Date();
+const year = date.getFullYear();
+const month = date.getMonth()+1;
+const day = date.getDate();
+const hour = date.getHours();
+const minute = date.getMinutes();
+const second = date.getSeconds();
+
 
 let options = {};
 
@@ -26,14 +34,6 @@ exports.beaconEvents = function(eventInfo){
         }else{
           const room = result_room[0].room;
           if(eventInfo.beacon.type == 'enter'){
-            const date = new Date();
-            const year = date.getFullYear();
-            const month = date.getMonth()+1;
-            const day = date.getDate();
-            const hour = date.getHours();
-            const minute = date.getMinutes();
-            const second = date.getSeconds();
-
             connection.query(`INSERT INTO userLocation(userID,room,date,time) VALUES("${userID}","${room}","${year}-${month}-${day}","${hour}:${minute}:${second}")`,function(error,result,fields){
               if(error){
                 throw error;
