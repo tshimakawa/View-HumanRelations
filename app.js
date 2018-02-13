@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const https = require('https');
 const fs = require('fs');
+const ejs = require('ejs');
 
 const index = require('./routes/index');
 const users = require('./routes/users');
@@ -22,7 +23,10 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/views', express.static(__dirname + '/views'));
+app.use('/routes', express.static(__dirname + '/routes'));
 
 //HTTPS通信で使用するためのSSLキーを設定
 const ssloptions = {
@@ -54,6 +58,9 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+// テンプレートエンジンの設定
+app.engine('ejs',ejs.renderFile);
 
 // ポート設定
 app.set('httpsport', process.env.PORT || 44502);
